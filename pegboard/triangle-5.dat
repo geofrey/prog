@@ -1,0 +1,18 @@
+# ID	x	y	{direction+neighborID}
+# x and y should both be positive
+1	5	5	e2	f3
+2	4	4	a3	b1	e4	f5
+3	6	4	c1	d2	e5	f6
+4	3	3	a5	b2	e7	f8
+# ID* means this peg is empty at the beginning
+5*	5	3	a6	b3	c2	d4	e8	f9
+6	7	3	c3	d5	e9	f10
+7	2	2	a8	b4	e11	f12
+8	4	2	a9	b5	c4	d7	e12	f13
+9	6	2	a10	b6	c5	d8	e13	f14
+10	8	2	c6	d9	e14	f15
+11	1	1	a12	b7
+12	3	1	a13	b8	c7	d11
+13	5	1	a14	b9	c8	d12
+14	7	1	a15	b10	c9	d13
+15	9	1	c10	d14
