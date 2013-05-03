@@ -1,0 +1,21 @@
+.\" Process this file with
+.\" groff -man -Tascii foo.1
+.\"
+.TH PLUMBER 1 "June 2005" Linux "User Manuals"
+.SH NAME
+Plumber \- Creates a directed graph of pipes
+
+.SH SYNOPSIS
+.B plumber [-s] 1:program1 2:program2 ... -e 1,2 1,3 ... 
+.SH DESCRIPTION
+.B plumber
+creates a directed graph of pipes connecting standard out, standard in, and the specified programs.
+.SH OPTIONS
+.IP -s
+Process source by source rather than line by line.
+.SH EXAMPLES
+plumber 1:who 2:cat -e 1,2
+.SH BUGS
+It doesn't work 
+.SH AUTHOR
+Team xswitch

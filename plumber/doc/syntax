@@ -1,0 +1,23 @@
+
+graph-program  "1:prog1 -n -m"  2:prog2 3:prog3 -e 1,3 2,3
+
+
+nton-program prog1 prog2 : prog3 prog4
+
+prog1 				prog3
+			>--< 
+prog2					prog4
+
+
+mux filename prog1 prog2
+
+prog1
+			-->  file
+prog2
+
+demux filename prog1 prog2
+
+				prog1
+file	--<
+				prog2
+

@@ -1,0 +1,27 @@
+progname nodelist [-e edgelist]
+
+nodelist --> node nodelist
+nodelist --> null
+
+edgelist --> edge edgelist
+edgelist --> null
+
+node --> int:string
+edge --> int,int
+progname --> string
+
+
+
+
+procedure:
+
+scan nodelist
+	get number and command name
+		remap number into a series of consecutive integers starting at 1
+	add to table
+allocate NxN matrix, where N is the number of commands to be run
+
+scan edgelist
+	get pair
+	initialize FIFO
+	store FIFO filename in adjacency matrix

@@ -1,0 +1,361 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>Form1</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>Form1</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>1050</width>
+            <height>531</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>QTPlumb quick demo</string>
+    </property>
+    <widget class="QGroupBox">
+        <property name="name">
+            <cstring>groupBox1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>10</y>
+                <width>510</width>
+                <height>460</height>
+            </rect>
+        </property>
+        <property name="title">
+            <string>Input programs</string>
+        </property>
+        <widget class="QListBox">
+            <property name="name">
+                <cstring>listBox1</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>30</y>
+                    <width>380</width>
+                    <height>380</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="QLineEdit">
+            <property name="name">
+                <cstring>lineEdit1</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>420</y>
+                    <width>381</width>
+                    <height>31</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>addbutton1</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>400</x>
+                    <y>80</y>
+                    <width>100</width>
+                    <height>30</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Add</string>
+            </property>
+            <property name="autoDefault">
+                <bool>false</bool>
+            </property>
+            <property name="default">
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>removebutton1</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>400</x>
+                    <y>120</y>
+                    <width>101</width>
+                    <height>31</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Remove</string>
+            </property>
+            <property name="autoDefault">
+                <bool>false</bool>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>pushButton5</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>400</x>
+                    <y>160</y>
+                    <width>101</width>
+                    <height>31</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Clear</string>
+            </property>
+        </widget>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>pushButton9</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>530</x>
+                <y>480</y>
+                <width>140</width>
+                <height>40</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Clear all</string>
+        </property>
+    </widget>
+    <widget class="QGroupBox">
+        <property name="name">
+            <cstring>groupBox2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>530</x>
+                <y>10</y>
+                <width>510</width>
+                <height>460</height>
+            </rect>
+        </property>
+        <property name="title">
+            <string>Output programs</string>
+        </property>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>addbutton2</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>400</x>
+                    <y>80</y>
+                    <width>100</width>
+                    <height>30</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Add</string>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>removebutton2</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>400</x>
+                    <y>120</y>
+                    <width>101</width>
+                    <height>31</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Remove</string>
+            </property>
+        </widget>
+        <widget class="QPushButton">
+            <property name="name">
+                <cstring>pushButton6</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>400</x>
+                    <y>160</y>
+                    <width>101</width>
+                    <height>31</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>Clear</string>
+            </property>
+        </widget>
+        <widget class="QListBox">
+            <property name="name">
+                <cstring>listBox3</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>30</y>
+                    <width>380</width>
+                    <height>380</height>
+                </rect>
+            </property>
+        </widget>
+        <widget class="QLineEdit">
+            <property name="name">
+                <cstring>lineEdit2</cstring>
+            </property>
+            <property name="geometry">
+                <rect>
+                    <x>10</x>
+                    <y>420</y>
+                    <width>381</width>
+                    <height>31</height>
+                </rect>
+            </property>
+        </widget>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>runbutton</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>380</x>
+                <y>480</y>
+                <width>140</width>
+                <height>40</height>
+            </rect>
+        </property>
+        <property name="font">
+            <font>
+            </font>
+        </property>
+        <property name="text">
+            <string>Run programs</string>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>removebutton1</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>removeselection1()</slot>
+    </connection>
+    <connection>
+        <sender>addbutton1</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>additem1()</slot>
+    </connection>
+    <connection>
+        <sender>lineEdit1</sender>
+        <signal>returnPressed()</signal>
+        <receiver>Form1</receiver>
+        <slot>additem1()</slot>
+    </connection>
+    <connection>
+        <sender>pushButton5</sender>
+        <signal>clicked()</signal>
+        <receiver>listBox1</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>pushButton6</sender>
+        <signal>clicked()</signal>
+        <receiver>listBox3</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>addbutton2</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>additem2()</slot>
+    </connection>
+    <connection>
+        <sender>lineEdit2</sender>
+        <signal>returnPressed()</signal>
+        <receiver>Form1</receiver>
+        <slot>additem2()</slot>
+    </connection>
+    <connection>
+        <sender>removebutton2</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>removeselection2()</slot>
+    </connection>
+    <connection>
+        <sender>runbutton</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>run()</slot>
+    </connection>
+    <connection>
+        <sender>pushButton9</sender>
+        <signal>clicked()</signal>
+        <receiver>listBox1</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>pushButton9</sender>
+        <signal>clicked()</signal>
+        <receiver>listBox3</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>pushButton9</sender>
+        <signal>clicked()</signal>
+        <receiver>lineEdit1</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>pushButton9</sender>
+        <signal>clicked()</signal>
+        <receiver>lineEdit2</receiver>
+        <slot>clear()</slot>
+    </connection>
+    <connection>
+        <sender>lineEdit2</sender>
+        <signal>lostFocus()</signal>
+        <receiver>Form1</receiver>
+        <slot>additem2()</slot>
+    </connection>
+    <connection>
+        <sender>lineEdit1</sender>
+        <signal>lostFocus()</signal>
+        <receiver>Form1</receiver>
+        <slot>additem1()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>lineEdit1</tabstop>
+    <tabstop>lineEdit2</tabstop>
+    <tabstop>runbutton</tabstop>
+    <tabstop>addbutton1</tabstop>
+    <tabstop>pushButton5</tabstop>
+    <tabstop>removebutton1</tabstop>
+    <tabstop>listBox1</tabstop>
+    <tabstop>pushButton9</tabstop>
+    <tabstop>addbutton2</tabstop>
+    <tabstop>removebutton2</tabstop>
+    <tabstop>pushButton6</tabstop>
+    <tabstop>listBox3</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in implementation">form1.ui.h</include>
+</includes>
+<slots>
+    <slot>additem1()</slot>
+    <slot>removeselection1()</slot>
+    <slot>additem2()</slot>
+    <slot>removeselection2()</slot>
+    <slot>run()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

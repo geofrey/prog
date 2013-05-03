@@ -1,0 +1,188 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>configBox</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>configBox</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>694</width>
+            <height>139</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>QTPlumb Settings</string>
+    </property>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel1</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>20</y>
+                <width>141</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Plumber location</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>xtermPath</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>160</x>
+                <y>60</y>
+                <width>400</width>
+                <height>30</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>browseXterm</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>570</x>
+                <y>60</y>
+                <width>111</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Browse</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>textLabel2</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>60</y>
+                <width>140</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Xterm location</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>cancelButton</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>350</x>
+                <y>100</y>
+                <width>111</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Cancel</string>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>browsePlumber</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>570</x>
+                <y>20</y>
+                <width>111</width>
+                <height>31</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Browse</string>
+        </property>
+    </widget>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>plumberPath</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>161</x>
+                <y>20</y>
+                <width>400</width>
+                <height>30</height>
+            </rect>
+        </property>
+    </widget>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>okButton</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>220</x>
+                <y>100</y>
+                <width>120</width>
+                <height>30</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>OK</string>
+        </property>
+        <property name="default">
+            <bool>true</bool>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>cancelButton</sender>
+        <signal>clicked()</signal>
+        <receiver>configBox</receiver>
+        <slot>close()</slot>
+    </connection>
+    <connection>
+        <sender>browsePlumber</sender>
+        <signal>clicked()</signal>
+        <receiver>configBox</receiver>
+        <slot>browse_plumber()</slot>
+    </connection>
+    <connection>
+        <sender>browseXterm</sender>
+        <signal>clicked()</signal>
+        <receiver>configBox</receiver>
+        <slot>browse_xterm()</slot>
+    </connection>
+    <connection>
+        <sender>okButton</sender>
+        <signal>clicked()</signal>
+        <receiver>configBox</receiver>
+        <slot>ok_click()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>plumberPath</tabstop>
+    <tabstop>xtermPath</tabstop>
+    <tabstop>okButton</tabstop>
+    <tabstop>cancelButton</tabstop>
+    <tabstop>browsePlumber</tabstop>
+    <tabstop>browseXterm</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in implementation">configbox.ui.h</include>
+</includes>
+<slots>
+    <slot>ok_click()</slot>
+    <slot>browse_plumber()</slot>
+    <slot>browse_xterm()</slot>
+    <slot>init_two()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>
