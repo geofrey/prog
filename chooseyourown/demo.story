@@ -1,3 +1,7 @@
+Demo Story
+gws
+intro	world
+
 intro
 Congratulations! This is the first scene of this interactive fiction. From here you must proceed to the MENU.
 menu	menu
