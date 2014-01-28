@@ -1,45 +1,12 @@
 #!/usr/bin/python
 
 import sys
-
+import clipboard
+from clipboard import writeclipboard
 
 def deexcelate(items):
 	return list(filter(lambda item: len(item)>0 and item != '\x00', items))
-
-def readclipboard_Cygwin():
-	clip = open('/dev/clipboard', 'r')
-	data = clip.readlines()
-	clip.close()
-	return deexcelate(data)
-
-def writeclipboard_Cygwin(data):
-	clip = open('/dev/clipboard', 'w')
-	clip.write(data)
-	clip.close()
-
-def readclipboard_win32():
-	win32clipboard.OpenClipboard()
-	formats = [win32clipboard.CF_TEXT, win32clipboard.CF_UNICODETEXT, win32clipboard.CF_OEMTEXT, win32clipboard.CF_DSPTEXT]
-	format = win32clipboard.GetPriorityClipboardFormat(formats)
-	if format == -1:
-		raise Exception('clipboard empty')
-	if format == None:
-		raise Exception('no text on clipboard. format = {format}'.format(format=format))
-	data = win32clipboard.GetClipboardData(format)
-	win32clipboard.CloseClipboard()
-	return deexcelate(data.decode('utf-8').strip().split('\n')) # utf-8 encoding is probably not appropriate for all formats, but this application only places ASCII/utf-8 anyway, so fugeddaboudit
-
-def writeclipboard_win32(data):
-	win32clipboard.OpenClipboard()
-	win32clipboard.EmptyClipboard()
-	win32clipboard.SetClipboardText(data, win32clipboard.CF_TEXT)
-	win32clipboard.CloseClipboard()
-
-if sys.platform == 'cygwin':
-	readclipboard, writeclipboard = readclipboard_Cygwin, writeclipboard_Cygwin
-elif sys.platform == 'win32':
-	import win32clipboard
-	readclipboard, writeclipboard = readclipboard_win32, writeclipboard_win32
+readclipboard = lambda: deexcelate(clipboard.readclipboard())
 
 # sanity check
 def quicktest():
@@ -90,14 +57,13 @@ def process(tabular, format, header='', footer='', meta={}):
 
 meta = {
 	't' : '\t',
+	'sep': '&'
 	}
-header = '''var data = {{
-'''
+header = '''http://web.site/form?'''
 
-footer = '''}}'''
+footer = ''''''
 
-format = '''{t}Util.mkPair("{valuationid}", {version}),
-'''
+format = '''{name}{sep}{value}'''
 	
 # now that we've got all that settled
 writeclipboard(process(readclipboard(), format, header, footer, meta))
