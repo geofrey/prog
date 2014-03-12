@@ -2,6 +2,7 @@ import sys
 
 from chooseyourownclasses import Scene, Game
 from chooseyourownutil import *
+from chooseyourownbuiltins import builtins
 
 if len(sys.argv) == 2:
 	storyname = sys.argv[1]
@@ -9,10 +10,15 @@ else:
 	print 'What story would you like to play? Type a file name:'
 	storyname = sys.stdin.readline().strip()
 
-storyfile = open(storyname).readlines()
-storyfile = filter(lambda line: len(line) > 0, map(lambda line: line.rstrip(), storyfile))
-story = treead(Linerator(storyfile))
+story = applysequence(storyname, [
+	lambda name: open(name).readlines(),
+	sanitizefile,
+	Linerator,
+	treead
+])
+
 game = Game.load(story)
+#print(game)
 
 # set up the command loop
 current = game.initial
@@ -23,8 +29,8 @@ while len(command) > 0:
 	print game.scenelist[current].description
 	print '> ',
 	command = sys.stdin.readline().strip().lower()
-	if command == 'exit':
-		exit()
+	if command in builtins.keys():
+		builtins[command]()
 	elif command in game.scenelist[current].paths:
 		current = game.scenelist[current].paths[command].dst
 	else:

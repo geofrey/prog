@@ -25,42 +25,7 @@ class Reprobate: # because "__repr__", get it?
 				data.append(subtype.__repr__(self, subtype, seen+[subtype], indent+indentstep))
 		return '\n'.join(data)
 
-class EventListener(Reprobate):
-	events = {} # name : [action]
-	
-	def serialize(self, indent):
-		if len(events) == 0:
-			return indent
-		# else:
-		title = indent + 'events'
-		content = '\n'.join([indent+indentstep+'{name}\t{value}'.format(name=item, value=self.events[item]) for item in self.events.keys()])
-		return title + '\n' + content
-	
-	def dispatch(self, event):
-		if event in self.events:
-			for action in self.events[event]:
-				action.execute()
-	
-	def hook(self, event, action):
-		if event not in self.events:
-			self.events[event] = []
-		self.events[event].append(action)
-
-class Predicated(Reprobate):
-	conditions = []
-	
-	def serialize(self, indent=''):
-		return '\n'.join([indent+'conditions'] + [indent + indentstep + '{name}\t{value}'.format(name=item, value=self.conditions[item]) for item in self.conditions])
-		
-	def check(self):
-		# evaluate conditions
-		# may need more parameters
-		raise NotImplemented()
-
-class Path(Predicated):
-	name=''
-	dst=''
-	
+class Path(Reprobate):
 	def __init__(self, name, destination):
 		self.name = name
 		self.dst = destination
@@ -72,10 +37,11 @@ class Path(Predicated):
 	def serialize(self, indent=''):
 		return(indent+'path\t{name}\t{dst}'.format(name=self.name, dst=self.dst))
 
-class Action(Predicated):
-	name = ''
-	effects = []
-	consequences = []
+class Action(Reprobate):
+	def __init__(self, name, effects, consequences):
+		self.name = ''
+		self.effects = []
+		self.consequences = []
 	
 	def serialize(self, indent=''):
 		data = []
@@ -96,7 +62,7 @@ class Action(Predicated):
 			for effect in consequences:
 				effect.apply()
 
-class Effect(Reprobate):
+class Effect:
 	# any data?
 	def apply(self):
 		raise NotImplemented()
@@ -105,21 +71,36 @@ class CreateItem(Effect): # see where this is going?
 	def __init__(self, item, target):
 		raise NotImplemented()
 
-class Item(EventListener):
-	name = ''
-	description = ''
+class Item:
+	def __init__(self):
+		for base in self.__class__.__bases__:
+			base.__init__(self) # ugly...
+		self.name = ''
+		self.description = ''
 	
-	def __init__(self, name, description):
-		self.name = name
-		self.description = description
+	def serialize(self, indent=''):
+		return indent+'\t'.join(['item', self.name, self.description])
+	
+	@staticmethod
+	def load(object):
+		item = Item()
+		item.name, item.description = object[0]
+		return item
 
 class Inventoried(Reprobate):
-	inventory = []
+	def __init__(self):
+		self.inventory = []
 	
 	def serialize(self, indent=''):
 		if self.inventory:
-			return [indent+'inventory'] + '\n'.join([indent+indentstep+item for item in self.inventory])
-	
+			return '\n'.join([indent+'inventory'] + [indent+indentstep+item.serialize() for item in self.inventory])
+
+	# I don't like that this is inconsistent with the other static load methods
+	def load(self, data):
+		# nothing to load from data[0]
+		for entity in data[1]:
+			self.inventory.append(Item.load(entity))
+					
 	def add(self, item):
 		self.inventory.append(item)
 	
@@ -136,9 +117,10 @@ class Inventoried(Reprobate):
 		return False
 
 class Stateful(Reprobate):
-	state = {}
+	def __init__(self):
+		self.state = {}
 	
-	def serialize(self, indent):
+	def serialize(self, indent=''):
 		if self.state:
 			return '\n'.join([indent+'state'] + [indent+indentstep+'{name}\t{value}'.format(name=item, value=self.state[item]) for item in self.state])
 	
@@ -163,15 +145,18 @@ class Scene(Inventoried, Stateful):
 		self.description = ''
 		self.paths = {}
 		self.parent = None
+		
+		Inventoried.__init__(self)
+		Stateful.__init__(self)
 
 	def serialize(self, indent=''):
 		data = []
 		data.append(indent+'\t'.join(['scene', self.id, self.parent, self.description]))
-		# description and parent don't get their own lines yet
-		#data.append(indent+indentstep+'desc\t{0}'.format(self.description))
-		#if self.parent:
-		#	data.append(indent+indentstep+'parent\t{0}'.format(self.parent))
 		data += [path.serialize(indent+indentstep) for path in self.paths.values()]
+		if self.inventory:
+			data.append(Inventoried.serialize(self, indent+indentstep))
+		if self.state:
+			data.append(Stateful.serialize(self, indent+indentstep))
 		return '\n'.join(data)
 	
 	@staticmethod
@@ -183,7 +168,7 @@ class Scene(Inventoried, Stateful):
 			name = details[0][0]
 			item = details[0][1:]
 			if name == 'inventory':
-				raise NotImplemented('Inventory is backordered.')
+				Inventoried.load(scene, details)
 			elif name == 'state':
 				raise NotImplemented('Enemy Of The State parsing routine')
 			elif name == 'path':
@@ -194,9 +179,18 @@ class Scene(Inventoried, Stateful):
 		return scene
 
 class Player(Inventoried, Stateful):
+	def __init__(self):
+		self.name = ''
+		Inventoried.__init__(self)
+		Stateful.__init__(self)
+	
 	def serialize(self, indent=''):
-		if self.inventory or self.state:
-			return indent + 'player\t{0}'.format(self.name)
+		data = indent + 'player\t{0}'.format(self.name)
+		if self.inventory:
+			data += Inventoried.serialize(self, indent+indentstep)
+		if self.state:
+			data += Stateful.serialize(self, indent+indentstep)
+		return data
 	
 	@staticmethod
 	def load(file): # file:Linerator
@@ -234,3 +228,4 @@ class Game(Reprobate):
 			else:
 				raise ValueError('I have no idea what you mean by \'{0}\'. Fix your game file or something.'.format(entity[0][0]))
 		return game
+	

@@ -1,12 +1,12 @@
 import functools
 import re
 
-commentpattern = re.compile('\s*#.*$')
-whitespacepattern = re.compile('^\s*')
+commentpattern = re.compile(r'\s*(?<!\\)#.*$')
+whitespacepattern = re.compile(r'^\s*')
 def getindent(line):
 	return len(whitespacepattern.match(line).group())
 
-stripcomments = lambda line: re.sub(commentpattern, '', string)
+stripcomments = lambda line: re.sub(commentpattern, '', line)
 
 class Linerator:
 	lines = []
@@ -37,3 +37,15 @@ def treead(lines):
 		if lines.hasNext() and getindent(current) > getindent(lines.peek()):
 			break # indent decreases
 	return forest
+
+def sanitizefile(lines):
+	return filter(
+		lambda line: len(line) > 0, 
+		map(
+			lambda line: stripcomments(line.rstrip()),
+			lines
+		)
+	)
+
+def applysequence(arg, ops):
+	return applysequence(ops[0](arg), ops[1:]) if ops else arg
