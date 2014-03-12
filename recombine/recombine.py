@@ -7,9 +7,9 @@ from recombinations import *
 
 # game variables
 
-mode = 'rapidfire' # set to 'rapidfire' for nonstop single-green drops
+mode = 'normal' # set to 'rapidfire' for nonstop single-green drops
 # (anything else is === 'normal')
-autofire = False # only used with 'rapidfire'
+autofire = True # only used with 'rapidfire'
 
 boardheight = 7
 boardwidth = 7
@@ -23,6 +23,7 @@ gridsize = 40
 boardoffset = int(gridsize/2)
 maxcolor = 10
 mouse = (0, 0)
+turn = 0
 score = 0
 
 state = 'idle'
@@ -50,6 +51,13 @@ outlinecolor = pygame.Color('black')
 
 validgroup = lambda l: len(l)>=3
 
+def shutdown():
+    pygame.event.clear()
+    pygame.quit()
+    print(turn)
+    print(score)
+    quit()
+	
 # event loop
 
 while True:
@@ -85,20 +93,21 @@ while True:
         if event.type == pygame.MOUSEMOTION:
             mouse = event.pos
             # game state is updated inside event handling to allow mouse+keyboard input
-            dropindex = int((max(boardpos.left, min(mouse[0], boardpos.right)) - boardoffset - 1) / gridsize)
+            ## Adjust mouse position by the border width, clip that at 0.
+            ## Scale down by the size of each square and clip that at piece-width away from the right edge.
+            dropindex = min(max(mouse[0]-boardoffset, 0) / gridsize, boardwidth - len(drop[0]))
         
         if event.type == pygame.QUIT:
-            pygame.event.clear()
-            pygame.quit()
-            quit()
+            shutdown()
 
     # update stuff
     if state == 'drop':
-        if mode == 'rapidfire' and autofire == True:
+        if mode == 'rapidfire' and autofire:
             dropindex = boardwidth - 1
             while dropindex >= 0 and board[boardheight-1][dropindex] != 0:
                 dropindex -= 1
         board.insert(drop, dropindex)
+        turn += 1
         state = 'moving'
     elif state == 'moving':
         state = 'moving' if board.gravity() else 'breaking'
@@ -115,13 +124,15 @@ while True:
             state = 'moving'
         else:
             if board.overheight():
-                pygame.event.post(pygame.event.Event(pygame.QUIT, {}))
+                state = 'gameover'
             else:
                 drop = new_drop(currentcolor, mode)
                 frametime = idletime
                 state = 'idle'
                 if mode == 'rapidfire':
                     state = 'drop'
+    elif state == 'gameover':
+        break
 
     # draw board
     
@@ -152,7 +163,7 @@ while True:
                 piece.left = boardpos.left + (j + offset)*gridsize
                 draw.ellipse(screen, combinecolors[drop[i][j]], piece, 0)
     
-    # draw board
+    # draw pieces
     
     for i in range(0, len(board.grid)):
         piece.bottom = boardpos.bottom - i*gridsize
@@ -176,8 +187,6 @@ while True:
     if elapsed < frametime:
         time.sleep(frametime - elapsed)
 
-# if we ever break out of the loop for some unexpected reason:
-pygame.event.clear()
-pygame.quit()
-quit()
+# finally
+shutdown()
 
