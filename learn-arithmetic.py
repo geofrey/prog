@@ -57,22 +57,27 @@ def full_add(i, j, ci):
 def digits_add(p1, p2):
 	result = []
 	carry = zero
-	if len(p2) > len(p1): # hmm, '>' is a bit too much like knowing what a number is
+	if len(p2) > len(p1): # hmm, '>' is a bit too much like knowing what a number is. Let's pretend ordinals are different.
 		p1, p2 = p2, p1
-	for place in range(len(p2)):
+	for place in range(len(p2)): # add pairwise
 		result[len(result):], carry = full_add(p1[place], p2[place], carry)
-	for place in range(len(p2), len(p1)):
+	for place in range(len(p2), len(p1)): # continue carrying
 		result[len(result):], carry = add(p1[place], carry)
-	result[len(result):] = carry
+	if carry != zero: # one last digit
+		result[len(result):] = carry
 	return result
 
 twentythree = ['3', '2']
 nineninety = ['0', '9', '9']
-print(digits_add(twentythree, nineninety))
+#print(digits_add(twentythree, nineninety))
 
-def prettyprint(digits):
+def prettyprint(digits, width=0):
 	stigid = digits[:]
 	stigid.reverse()
-	print(''.join(stigid))
+	print(' '*(width-len(stigid)) + ''.join(stigid))
 
-prettyprint(digits_add(nineninety, twentythree))
+total = digits_add(nineninety, twentythree)
+width = max(len(twentythree), len(nineninety), len(total))
+prettyprint(nineninety, width)
+prettyprint(twentythree, width)
+prettyprint(total, width)
