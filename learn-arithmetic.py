@@ -43,9 +43,36 @@ build_additiontables()
 def add(i, j): # redefine now that we have tables
 	return sum_value[i, j], sum_carry[i, j]
 
-print(add('6', '7'))
+#print(add('6', '7'))
 
-def add(i, j): # let's make it prettier
-	return ''.join([sum_carry[(i,j)], sum_value[(i,j)]])
+def full_add(i, j, ci):
+	s,c = add(i, j)
+	s,co = add(s, ci)
+	co,dummy = add(c, co) # actually we'll never carry out more than 1 from a single-digit sum...
+	return s, co
 
-print(add('6', '7'))
+#print(full_add('8', '2', zero))
+#print(full_add('8', '2', '1'))
+
+def digits_add(p1, p2):
+	result = []
+	carry = zero
+	if len(p2) > len(p1): # hmm, '>' is a bit too much like knowing what a number is
+		p1, p2 = p2, p1
+	for place in range(len(p2)):
+		result[len(result):], carry = full_add(p1[place], p2[place], carry)
+	for place in range(len(p2), len(p1)):
+		result[len(result):], carry = add(p1[place], carry)
+	result[len(result):] = carry
+	return result
+
+twentythree = ['3', '2']
+nineninety = ['0', '9', '9']
+print(digits_add(twentythree, nineninety))
+
+def prettyprint(digits):
+	stigid = digits[:]
+	stigid.reverse()
+	print(''.join(stigid))
+
+prettyprint(digits_add(nineninety, twentythree))
