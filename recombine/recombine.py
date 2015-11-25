@@ -1,3 +1,4 @@
+#!/usr/bin/python
 
 import pygame
 from pygame import rect, draw, event
@@ -54,10 +55,10 @@ validgroup = lambda l: len(l)>=3
 def shutdown():
     pygame.event.clear()
     pygame.quit()
-    print(turn)
-    print(score)
+    print(turn, 'turns')
+    print(score, 'points')
     quit()
-	
+
 # event loop
 
 while True:
@@ -83,7 +84,7 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 drop = spin(drop, 'right')
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN or event.key == pygame.K_SPACE:
                 if state != 'moving':
                     state = 'drop'
             if event.key == pygame.K_LEFT:
