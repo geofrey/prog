@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>TwoCans Avatar Scraper</title>
+
+<style type="text/css">
+#header {
+  position: fixed;
+  z-index: 2;
+}
+#body {
+  position: relative;
+  top: 50px;
+  z-index: 1; // underneath the header
+}
+.avatar {
+  position: static;
+  display: inline-block;
+  margin: 10px;
+}
+</style>
+
+<script type="text/javascript">
+function generate() {
+  clear();
+  populateAvatars();
+};
+function clear() {
+  var container = document.getElementById("body");
+  while(container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+};
+function populateAvatars() {
+  var container = document.getElementById("body");
+  var controls = document.getElementById('controls');
+  var base = parseInt(controls.elements['base'].value);
+  var count = parseInt(controls.elements['count'].value);
+  for(i=base; i<base+count; i++) {
+    var avatarNumber = i.toFixed(0);
+	var incoming = document.createElement("p");
+	incoming.className = 'avatar';
+	var avatar = document.createElement("img");
+	avatar.src = "https://twocansandstring.com/uploads/drawn/"+avatarNumber+".png";
+	incoming.appendChild(avatar);
+	incoming.appendChild(document.createElement("br"));
+	var label = document.createElement("span");
+	label.innerHTML = avatarNumber;
+	incoming.appendChild(label);
+	container.appendChild(incoming);
+  }
+};
+function updateParams() {
+  var base = document.getElementById('controls').elements['base'];
+  var count = document.getElementById('controls').elements['count'];
+  base.value = parseInt(base.value) + parseInt(count.value);
+};
+</script>
+
+<body>
+<div id="header">
+<form id="controls"><p>Start from: <input type="text" name="base" value="10"/> Count: <input type="text" name="count" value="10"/> <input type="button" onClick="generate()" value="Load"/> <input type="button" onClick="generate(); updateParams()" value="Load+"/></p></form>
+</div>
+<div id="body"></div>
+</body>
+</html>
