@@ -15,34 +15,38 @@ class CalculatorPuzzle:
         self.search_rec(self.moves, self.initial, [], solutions)
         return solutions
     def search_rec(self, moves, value, stack, solutions):
+        #print('stack: {0}'.format(stack))
         if moves < 1:
             return
-        solutions = []
         for button in self.buttons:
+            nextstack = stack+[button]
             result = dispatch_operation(button)(value)
-            print('{0} {1} -> {2}'.format(value, button, result))
-            print('{0} {1} {2}'.format(result, '==' if result == self.goal else '!=', self.goal))
+            #print('{0} {1} -> {2}'.format(value, button, result))
+            #print('{0} {1} {2}'.format(result, '==' if result == self.goal else '!=', self.goal))
             if result == self.goal:
-                print('{0} solves!'.format(stack))
-                solutions.append(stack)
-            self.search_rec(moves-1, result, stack+[button], solutions)
+                #print('{0} solves!'.format(nextstack))
+                solutions.append(nextstack)
+            self.search_rec(moves-1, result, nextstack, solutions)
     
     def __str__(self):
         return '{0} -> {1} in {2} using [{3}]'.format(self.initial, self.goal, self.moves, ', '.join(self.buttons))
     
-
-puzzles = []
-
-puzzles.append(CalculatorPuzzle(2, 2, 0, ['add1']))
-
 operations['add1'] = lambda value: value+1
+operations['add9'] = lambda value: value+9
+operations['negate'] = lambda value: -value
+operations['div2'] = lambda value: value/2.0
+operations['mul4'] = lambda value: value*4.0
+
+puzzles = {}
+puzzles['1'] = CalculatorPuzzle(2, 2, 0, ['add1'])
+puzzles['44'] = CalculatorPuzzle(5, 52, 44, ['add9', 'div2', 'mul4', 'negate'])
 
 print(dispatch_operation('add1')(3))
 
-for i in range(0, len(puzzles)):
-    print('level {0}: {1}'.format(i, puzzles[i]))
-    solutions = puzzles[i].search()
+for tag in puzzles:
+    print('level {0}: {1}'.format(tag, puzzles[tag]))
+    solutions = puzzles[tag].search()
     for solution in solutions:
-        print(', '.join(solution))
+        print(' * {0}'.format(', '.join(solution)))
 
 #
