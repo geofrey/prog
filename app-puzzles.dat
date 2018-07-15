@@ -1,0 +1,25 @@
+#level-id, moves, goal, initial value, list, of, buttons, available
+1, 2, 2, 0, add1
+2, 3, 8, 0, add2, add3
+3, 3, 12, 0, mul4, add1, add2
+4, 3, 7, 1, add4, sub2
+5, 3, 4, 3, add4, mul4, div4
+6, 4, 64, 0, add2, mul4
+7, 3, 5, 4, div3, add3, mul3
+8, 3, 4, 4321, delete
+9, 3, 4, 0, add8, mul5
+10, 4, 9, 50, div5, mul3, delete
+11, 3, 100, 99, sub8, mul11, delete
+12, 5, 404, 0, add8, mul10, div2
+13, 4, 23, 171, mul2, sub9, delete
+14, 5, 21, 0, add5, mul3, mul5, delete
+15, 3, 50, 10, mul3, mul2, sub5
+16, 5, 2, 0, add4, mul9, delete
+17, 2, 11, 0, type1
+18, 3, 101, 0, type1, type0
+19, 3, 44, 0, type2, mul2
+20, 2, 35, 0, add3, type5
+21, 3, 56, 0, type1, add5
+22, 4, 9, 0, add2, div3, type1
+
+44, 5, 52, 44, add9, div2, mul4, negate
