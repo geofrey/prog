@@ -43,10 +43,13 @@ puzzles['44'] = CalculatorPuzzle(5, 52, 44, ['add9', 'div2', 'mul4', 'negate'])
 
 print(dispatch_operation('add1')(3))
 
-for tag in puzzles:
-    print('level {0}: {1}'.format(tag, puzzles[tag]))
-    solutions = puzzles[tag].search()
+tags = list(puzzles.keys())
+tags.sort()
+for tag in tags:
+    puzzle = puzzles[tag]
+    print('level {0}: {1}'.format(tag, puzzle))
+    solutions = puzzle.search()
     for solution in solutions:
-        print(' * {0}'.format(', '.join(solution)))
+        print(' {1} {0}'.format(', '.join(solution), '!' if len(solution) < puzzle.moves else '*'))
 
 #
