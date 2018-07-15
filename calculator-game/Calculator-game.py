@@ -36,6 +36,7 @@ operations['add2'] = lambda value: value+2
 operations['add3'] = lambda value: value+3
 operations['add4'] = lambda value: value+4
 operations['add5'] = lambda value: value+5
+operations['add6'] = lambda value: value+6
 operations['add8'] = lambda value: value+8
 operations['add9'] = lambda value: value+9
 
@@ -47,10 +48,16 @@ operations['div4'] = lambda value: value/4.0
 operations['div5'] = lambda value: value/5.0
 operations['div7'] = lambda value: value/7.0
 
+operations['edit1-2'] = lambda value: float(str(value).replace('1', '2'))
+operations['edit2-3'] = lambda value: float(str(value).replace('2', '3'))
+operations['edit6-9'] = lambda value: float(str(value).replace('6', '9'))
+operations['edit8-4'] = lambda value: float(str(value).replace('8', '4'))
+
 operations['mul2'] = lambda value: value*2
 operations['mul3'] = lambda value: value*3
 operations['mul4'] = lambda value: value*4
 operations['mul5'] = lambda value: value*5
+operations['mul7'] = lambda value: value*7
 operations['mul9'] = lambda value: value*9
 operations['mul10'] = lambda value: value*10
 operations['mul11'] = lambda value: value*11
@@ -66,6 +73,8 @@ operations['type0'] = lambda value: value*10+0
 operations['type1'] = lambda value: value*10+1
 operations['type2'] = lambda value: value*10+2
 operations['type5'] = lambda value: value*10+5
+operations['type10'] = lambda value: value*100+10
+operations['type12'] = lambda value: value*100+12
 
 
 puzzles = {}

@@ -21,5 +21,14 @@
 20, 2, 35, 0, add3, type5
 21, 3, 56, 0, type1, add5
 22, 4, 9, 0, add2, div3, type1
+23, 4, 10, 15, type0, add2, div5
+24, 5, 210, 0, sub5, add5, type5, type2
+25, 4, 2020, 40, type0, add4, div2
+26, 4, 11, 0, type12, delete
+27, 4, 102, 0, type10, add1, delete
+28, 4, 222, 0, type1, edit1-2
+29, 4, 93, 0, add6, mul7, edit6-9
+30, 6, 2321, 0, type1, type2, edit1-2, edit2-3
+31, 5, 24, 0, add9, mul2, edit8-4
 
 44, 5, 52, 44, add9, div2, mul4, negate
