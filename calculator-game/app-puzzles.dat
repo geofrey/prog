@@ -7,7 +7,7 @@
 6, 4, 64, 0, add2, mul4
 7, 3, 5, 4, div3, add3, mul3
 8, 3, 4, 4321, delete
-9, 3, 4, 0, add8, mul5
+9, 3, 4, 0, add8, mul5, delete
 10, 4, 9, 50, div5, mul3, delete
 11, 3, 100, 99, sub8, mul11, delete
 12, 5, 404, 0, add8, mul10, div2
