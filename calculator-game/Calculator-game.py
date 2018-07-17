@@ -1,7 +1,10 @@
+import sys
+
 operations = {}
 operations['negate'] = lambda value: -value
-operations['delete'] = lambda value: int(value/10) # this might not always work
-operations['reverse'] = lambda value: int(str(value).reverse())
+# this might be getting too long
+operations['delete'] = lambda value: (lambda word: float(word[:-1]) if sum(map(lambda ch: 1 if ch.isdigit() else 0, word))>1 else 0)('{0:.0f}'.format(value))
+operations['reverse'] = lambda value: float(''.join(reversed('{0:.0f}'.format(value))))
 
 def dispatch_operation(name):
     operation = None
@@ -48,8 +51,11 @@ class CalculatorPuzzle:
             return
         for button in self.buttons:
             nextstack = stack+[button]
+            #if button == 'delete':
+            #    sys.stdout.write('{0} {1} -> '.format(value, button))
             result = dispatch_operation(button)(value)
-            #print('{0} {1} -> {2}'.format(value, button, result))
+            #if button == 'delete':
+            #    print(result)
             #print('{0} {1} {2}'.format(result, '==' if result == self.goal else '!=', self.goal))
             if result == self.goal:
                 #print('{0} solves!'.format(nextstack))
@@ -86,6 +92,8 @@ for tag in tags:
     puzzle = puzzles[tag]
     print('level {0}: {1}'.format(tag, puzzle))
     solutions = puzzle.search()
+    if len(solutions) == 0:
+        print('WARNING - no solutions for puzzle {0}'.format(tag))
     for solution in solutions:
         print(' {1} {0}'.format(', '.join(solution), '!' if len(solution) < puzzle.moves else '*'))
 
