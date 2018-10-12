@@ -109,5 +109,4 @@ for i in range(len(grid)):
     print()
 
 # TODO
-#  ???
-#  profit!
+#  show remaining letters (in addition to solution)
