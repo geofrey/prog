@@ -43,11 +43,12 @@ class LetterNode:
 letters = LetterNode(None)
 for word in words:
     leaf = letters
-    for letter in range(len(word)):
-        if word[letter] not in leaf.next:
-            leaf.next[word[letter]] = LetterNode(word[letter])
-        leaf = leaf.next[word[letter]]
-        if letter == len(word)-1:
+    for i in range(len(word)):
+        letter = word[i].lower()
+        if letter not in leaf.next:
+            leaf.next[letter] = LetterNode(letter)
+        leaf = leaf.next[letter]
+        if i == len(word)-1:
             leaf.end = word
 
 # search grid
@@ -77,6 +78,7 @@ for i in range(len(grid)):
         for direction in directions:
             cursor = letters
             for letter in trace(i, j, direction):
+                letter = letter.lower()
                 if letter not in cursor.next:
                     break
                 cursor = cursor.next[letter]
@@ -107,6 +109,5 @@ for i in range(len(grid)):
     print()
 
 # TODO
-#  case-insensitive search
 #  ???
 #  profit!
