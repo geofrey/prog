@@ -107,6 +107,12 @@ for i in range(len(grid)):
     for j in range(len(grid[0])):
         print(grid[i][j] if shadow[i][j] else ' ', end='')
     print()
+# these are just opposites of each other
+print()
+for i in range(len(grid)):
+    for j in range(len(grid[0])):
+        print(grid[i][j] if not shadow[i][j] else ' ', end='')
+    print()
 
 # TODO
-#  show remaining letters (in addition to solution)
+#  
