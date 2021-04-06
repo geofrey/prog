@@ -1,0 +1,13 @@
+#Gosu Experiment
+#Thu Apr 01 15:08:04 EDT 2021
+Tab.Open.B=src/main/gosu/scratch/RunMe.gsp
+Tab.Open.A=src/main/gosu/scratch/cryptogram_guesser.gsp
+Recent.Program=scratch.cryptocracker
+Tab.Active=src/main/gosu/scratch/cryptocracker.gsp
+Name=cryptocracker
+Classpath.Entry0=src/main/gosu
+Tab.Open.G=src/main/gosu/scratch/TextUtil.gs
+Tab.Open.F=src/main/gosu/scratch/Util.gs
+Tab.Open.E=src/main/gosu/scratch/cryptocracker.gsp
+Tab.Open.D=src/main/gosu/scratch/Data.gs
+Tab.Open.C=src/main/gosu/scratch/check_for_vigenere.gsp
